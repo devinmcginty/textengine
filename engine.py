@@ -1,5 +1,10 @@
 import sys
 
+def clearScreen():
+    # Clears the console screen.
+    # This is pretty messy, so I'll probably change it when I get a chance
+    print(chr(27) + "[2J")
+
 class Room(object):
     def __init__(self, name, description):
         self.setName(name)
@@ -36,10 +41,11 @@ class Room(object):
         return self.description
 
     # Exit direction methods
-    def addExit(self, direction, room):
-        if direction in self.exits:
-            self.exits[direction] = room
-    def getExits(self):
+    def addExits(self, xdict):
+        for direction, room in xdict:
+            if direction in self.exits:
+                self.exits[direction] = room
+    def getExitDirections(self):
         return list(self.exits.keys())
     def showExits(self):
         rstring = ""
